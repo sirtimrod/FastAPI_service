@@ -1,4 +1,4 @@
-from sqlalchemy.ext.asyncio import AsyncConnection
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import User
 
@@ -6,7 +6,7 @@ from .models import User
 class UserDAL:
     """Data Access Layer for operating user info"""
 
-    def __init__(self, db_session: AsyncConnection) -> None:
+    def __init__(self, db_session: AsyncSession) -> None:
         self.db_session = db_session
 
     async def create_user(self, name: str, surname: str, email: str) -> User:

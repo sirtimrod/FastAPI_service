@@ -1,12 +1,12 @@
 import re
 import uuid
-from typing import Optional
 
 from fastapi import HTTPException
-from pydantic import BaseModel
-from pydantic import constr
-from pydantic import EmailStr
-from pydantic import validator
+from pydantic import (
+    BaseModel,
+    EmailStr,
+    validator,
+)
 
 
 LETTER_MATCH_PATTERN = re.compile(r"^[а-яА-Яa-zA-Z\-]+$")
@@ -34,8 +34,16 @@ class UserCreate(BaseModel):
 
     @validator("name")
     def validate_name(cls, value):
-        pass
+        if not LETTER_MATCH_PATTERN.match(value):
+            raise HTTPException(
+                status_code=422, delail="Name shoud contains only letters"
+            )
+        return value
 
     @validator("surname")
     def validate_surname(cls, value):
-        pass
+        if not LETTER_MATCH_PATTERN.match(value):
+            raise HTTPException(
+                status_code=422, delail="Surname shoud contains only letters"
+            )
+        return value
