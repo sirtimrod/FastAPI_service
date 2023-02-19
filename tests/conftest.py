@@ -68,7 +68,7 @@ async def _get_test_db():
 
 
 @pytest.fixture(scope="function")
-def client() -> Generator[TestClient, Any, None]:
+async def client() -> Generator[TestClient, Any, None]:
     app.dependency_overrides[get_db] = _get_test_db
     with TestClient(app) as client:
         yield client
