@@ -5,8 +5,10 @@ from sqlalchemy import (
     String,
 )
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import declarative_base
 
-from .db import Base
+
+Base = declarative_base()
 
 
 class User(Base):
